@@ -1,6 +1,9 @@
 MD_FILES = /md|mkdn?|mdown|markdown/
 
-if markup(:redcarpet, MD_FILES) do |content|
+if command('pandoc -S', MD_FILES) do |content|
+    content
+  end
+elsif markup(:redcarpet, MD_FILES) do |content|
     RedcarpetCompat.new(content).to_html
   end 
 elsif markup(:rdiscount, MD_FILES) do |content|
